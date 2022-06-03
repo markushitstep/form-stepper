@@ -35,7 +35,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
             ? <MyInput 
                 key={index}
                 onBlur={ (e) => onBlurHandler(e.target.name)}
-                blurprops={formData[currentValue].isBlur}
+                hasblur={formData[currentValue].isBlur}
                 name={currentValue}
                 type='password'
                 error={formData[currentValue].error}
@@ -49,7 +49,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
                 key={index}
                 name={currentValue}
                 onBlur={ (e) =>{ onBlurHandler(e.target.name)}}
-                blurprops={formData[currentValue].isBlur}
+                hasblur={formData[currentValue].isBlur}
                 type="text"
                 error={formData[currentValue].error}
                 placeholder={formData[currentValue].title}

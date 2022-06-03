@@ -34,7 +34,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
             key={index}
             name={currentValue}
             type="text"
-            blurprops={formData[currentValue].isBlur}
+            hasblur={formData[currentValue].isBlur}
             error={formData[currentValue].error}
             placeholder={formData[currentValue].title}
             value={formData[currentValue].value}

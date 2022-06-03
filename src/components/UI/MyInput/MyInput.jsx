@@ -1,12 +1,12 @@
 import React from 'react'
 
 const MyInput = (props) => {
-    const {error, blurprops} = props
+    const {error, hasblur, ...rest} = props
     return (
         <>
-        <input {...props} />
+        <input {...rest} />
         {
-           (blurprops && error) && <div className='error-div'>{error}</div>
+           (hasblur && error) && <div className='error-div'>{error}</div>
         }
         </>
     )

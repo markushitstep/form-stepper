@@ -32,7 +32,7 @@ const OtherInfo = ({ formData, setFormData }) => {
             name={currentValue}
             type="text" 
             onBlur={(e) => onBlurHandler(e.target.name)}
-            blurprops={formData[currentValue].isBlur}
+            hasblur={formData[currentValue].isBlur}
             error={formData[currentValue].error}
             placeholder={formData[currentValue].title}
             value={formData[currentValue].value}
