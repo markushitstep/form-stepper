@@ -3,11 +3,13 @@ import SignUpInfo from "./SignUpInfo";
 import PersonalInfo from "./PersonalInfo";
 import OtherInfo from "./OtherInfo";
 import { hasConfirmPassValidationErrors, hasEmailValidationErrors, hasNameValidationErrors, hasOtherValidationErrors, hasPasswordValidationErrors } from "../untils/validations";
+import { IFormData } from "../types/types";
 
-const Form = () =>{
-  const [page, setPage] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [formData, setFormData] = useState({
+
+const Form: React.FC = () =>{
+  const [page, setPage] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
+  const [formData, setFormData] = useState<IFormData>({
     email: {
       title: "Email",
       value: "",
@@ -57,23 +59,23 @@ const Form = () =>{
       isBlur: false
     }
   });
-  const [isFormValid, setFormValid] = useState(false);
+  const [isFormValid, setFormValid] = useState<boolean>(false);
   
-  const FormTitles = ["Sign Up", "Personal Info", "Other"];
+  const FormTitles:string[] = ["Sign Up", "Personal Info", "Other"];
   
   const setData = () => {
     setPage((currPage) => currPage + 1)
-    setProgress(progress+(100/FormTitles.length));
+    setProgress(progress+(100/FormTitles.length)); 
     setFormValid(false);
   }
 
-  const prevPage = (e) => {
+  const prevPage = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setPage((currPage) => currPage - 1);
     setProgress(progress-(100/FormTitles.length))
   }
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     (page === FormTitles.length - 1) ? console.log(formData) : setData()
   }
@@ -85,7 +87,7 @@ const Form = () =>{
   useEffect(() => {
     switch(page) {
       case 0:{
-        const isValidForm = (
+        const isValidForm: boolean = (
           !hasEmailValidationErrors(formData.email.value, formData.email.title) && 
           !hasPasswordValidationErrors(formData.password.value, formData.password.title) && 
           !hasConfirmPassValidationErrors(formData.confirmPassword.value, formData.confirmPassword.title, formData.password.value));
@@ -93,7 +95,7 @@ const Form = () =>{
         break;
       }
       case 1:{
-        const isValidForm = (
+        const isValidForm: boolean = (
           !hasNameValidationErrors(formData.firstName.value, formData.firstName.title) &&
           !hasNameValidationErrors(formData.lastName.value, formData.lastName.title) &&
           !hasNameValidationErrors(formData.userName.value, formData.userName.title)
@@ -102,7 +104,7 @@ const Form = () =>{
         break;
       }
       case 2:{
-        const isValidForm = (
+        const isValidForm: boolean = (
           !hasOtherValidationErrors(formData.nationality.value, formData.nationality.title) &&
           !hasOtherValidationErrors(formData.other.value, formData.other.title)
         )
@@ -116,10 +118,10 @@ const Form = () =>{
 
   const progressStyle = { width: `${progress}%`}
 
-  const FormPages = [
+  const FormPages: JSX.Element[] = [
     <SignUpInfo  formData={formData} setFormData={setFormData}/>, 
     <PersonalInfo formData={formData} setFormData={setFormData} />,
-    <OtherInfo formData={formData} setFormData={setFormData}/>
+    <OtherInfo formData={formData} setFormData={setFormData}/>,
   ];
   
   return (
@@ -138,7 +140,7 @@ const Form = () =>{
           <div className="footer">
             <button
               disabled={page === 0}
-              onClick={(e) => prevPage(e)}
+              onClick={prevPage}
             >
               Prev
             </button>
