@@ -1,5 +1,9 @@
 
-export const switchValidation = (value,name, passwordValue) => {
+export interface ValidationProps{
+    (value: string, name: string, passwordValue?: string | undefined ): string | undefined
+}
+
+export const switchValidation: ValidationProps = (value,name, passwordValue) => {
     switch (name) {
         case "email": {
             return hasEmailValidationErrors(value,name);
@@ -30,7 +34,7 @@ export const switchValidation = (value,name, passwordValue) => {
     }
 }
 
-export const hasEmailValidationErrors = (value, name) => {
+export const hasEmailValidationErrors: ValidationProps = (value, name) => {
     const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let errorMessage = '';
     if (!regEmail.test(String(value).toLowerCase())) {
@@ -42,7 +46,7 @@ export const hasEmailValidationErrors = (value, name) => {
     return errorMessage; 
 }
 
-export const hasPasswordValidationErrors = (value, name) => {
+export const hasPasswordValidationErrors: ValidationProps = (value, name) => {
     let errorMessage = '';
     if(value.length < 4 || value.length > 8){
         errorMessage = `${name} не может быть длиннее 8 и меньше 3 символов`;
@@ -53,7 +57,7 @@ export const hasPasswordValidationErrors = (value, name) => {
     return errorMessage;
 }
 
-export const hasConfirmPassValidationErrors = (value, name, passwordValue) => {
+export const hasConfirmPassValidationErrors: ValidationProps = (value, name, passwordValue) => {
     let errorMessage = '';
     if(!value) {
         errorMessage = `${name} не может быть пустым`;
@@ -64,7 +68,7 @@ export const hasConfirmPassValidationErrors = (value, name, passwordValue) => {
     return errorMessage;
 }
 
-export const hasNameValidationErrors = (value, name) => {
+export const hasNameValidationErrors: ValidationProps = (value, name) => {
     let errorMessage = '';
     if(value.length < 3) {
         errorMessage = `${name} не может быть меньше 3 символов` 
@@ -75,7 +79,7 @@ export const hasNameValidationErrors = (value, name) => {
     return errorMessage;
 }
 
-export const hasOtherValidationErrors = (value, name) => {
+export const hasOtherValidationErrors: ValidationProps = (value, name) => {
     let errorMessage = '';
     if(value.length < 3) {
         errorMessage = `${name} не может быть меньше 3 символов` 
