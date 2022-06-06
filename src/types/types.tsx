@@ -19,7 +19,7 @@ export interface IFormData {
 }
 export interface IProps  {
     formData: IFormData;
-    setFormData: Dispatch<SetStateAction<IFormData>>;
+    OnChangeFormData: (formData:IFormData) => void;
 } 
 
 export interface OnHandlerProps {

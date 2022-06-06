@@ -1,6 +1,6 @@
 
-export interface ValidationProps{
-    (value: string, name: string, passwordValue?: string | undefined ): string | undefined
+interface ValidationProps{
+    (value: string, name: string, passwordValue?: string ): string 
 }
 
 export const switchValidation: ValidationProps = (value,name, passwordValue) => {
@@ -30,7 +30,7 @@ export const switchValidation: ValidationProps = (value,name, passwordValue) => 
             return hasOtherValidationErrors(value,name);
         }
         default:
-            break;
+            return '';
     }
 }
 

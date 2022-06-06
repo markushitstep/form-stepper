@@ -1,28 +1,28 @@
 
 import React from "react";
-import { IFormDataItem, IProps, onBlurHandlerProps, OnHandlerProps } from "../types/types";
+import { IProps, onBlurHandlerProps, OnHandlerProps } from "../types/types";
 import { switchValidation } from "../untils/validations";
 import MyInput from "./UI/MyInput/MyInput";
 
 
-const SignUpInfo: React.FC<IProps> = ({ formData, setFormData }) => {
-  const {email, password, confirmPassword}: {email:IFormDataItem, password:IFormDataItem, confirmPassword:IFormDataItem} = formData;
+const SignUpInfo: React.FC<IProps> = ({ formData, OnChangeFormData }) => {
+  const {email, password, confirmPassword} = formData;
   
   const onHandler: OnHandlerProps = (value, name) => {
     let error = switchValidation(value ,name , formData.password.value);
-    setFormData({ ...formData, [name]: {title: formData[name as keyof typeof formData].title, value: value, error: error, isBlur: formData[name as keyof typeof formData ].isBlur }});
+    OnChangeFormData({ ...formData, [name]: {title: formData[name as keyof typeof formData].title, value: value, error: error, isBlur: formData[name as keyof typeof formData ].isBlur }});
   }
 
   const onBlurHandler: onBlurHandlerProps = (name) => {
     switch(name) {
       case 'email':
-        setFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
+        OnChangeFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
         break;
       case 'password':
-        setFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
+        OnChangeFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
         break;
       case 'confirmPassword':
-        setFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
+        OnChangeFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
         break;
       default:
           break;

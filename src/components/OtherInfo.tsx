@@ -1,23 +1,23 @@
 import React from "react";
-import { IFormDataItem, IProps, onBlurHandlerProps, OnHandlerProps } from "../types/types";
+import { IProps, onBlurHandlerProps, OnHandlerProps } from "../types/types";
 import { switchValidation } from "../untils/validations";
 import MyInput from './UI/MyInput/MyInput'
 
-const OtherInfo: React.FC<IProps> = ({ formData, setFormData }) => {
-  const {nationality, other}: {nationality:IFormDataItem, other:IFormDataItem} = formData;
+const OtherInfo: React.FC<IProps> = ({ formData, OnChangeFormData }) => {
+  const {nationality, other} = formData;
 
   const onHandler: OnHandlerProps = (value, name) => {
     let error = switchValidation(value, name);
-    setFormData({ ...formData, [name]: {title: formData[name as keyof typeof formData].title, value: value, error: error, isBlur: formData[name as keyof typeof formData].isBlur} });
+    OnChangeFormData({ ...formData, [name]: {title: formData[name as keyof typeof formData].title, value: value, error: error, isBlur: formData[name as keyof typeof formData].isBlur} });
   }
 
   const onBlurHandler: onBlurHandlerProps = (name) => {
     switch(name) {
       case 'nationality':
-        setFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
+        OnChangeFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
         break;
       case 'other':
-        setFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
+        OnChangeFormData({ ...formData, [name]: {title: formData[name].title, value: formData[name].value, error: formData[name].error, isBlur: true }});
         break;
       default:
           break;

@@ -119,9 +119,9 @@ const Form: React.FC = () =>{
   const progressStyle = { width: `${progress}%`}
 
   const FormPages: JSX.Element[] = [
-    <SignUpInfo  formData={formData} setFormData={setFormData}/>, 
-    <PersonalInfo formData={formData} setFormData={setFormData} />,
-    <OtherInfo formData={formData} setFormData={setFormData}/>,
+    <SignUpInfo  formData={formData} OnChangeFormData={setFormData}/>, 
+    <PersonalInfo formData={formData} OnChangeFormData={setFormData} />,
+    <OtherInfo formData={formData} OnChangeFormData={setFormData}/>,
   ];
   
   return (
